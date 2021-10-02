@@ -1,25 +1,13 @@
 import random
 
-# Stage 1
-print("""HANGMAN
-The game will be available soon.""")
+_words = ["JavaScript", "Java","Python", "Ruby"]
+_rngWord = _words[random.randrange(4)]
 
+print("Guess the word: " + _rngWord[0:len(_rngWord)-3]+"---")
 
-# Stage 2
-print("Guess the word:")
-if input() == "example":
+if input().lower() == _rngWord.lower():
     print("You survived!")
 else:
     print("You lost!")
-
-
-# Stage 3
-_words = ["JavaScript","Java","Python","Ruby"]
-print("Guess the word:")
-if input().lower() == _words[random.randrange(4)].lower():
-    print("You survived!")
-else:
-    print("You lost!")
-
 
 
