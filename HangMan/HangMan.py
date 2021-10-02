@@ -30,6 +30,7 @@ _words = ["javascript", "java","python", "ruby"]
 _randomWord = _words[random.randrange(len(_words))]
 _dashWord = ""
 _points = 8
+_inputChars = ""
 
 
 for i in range(len(_randomWord)):
@@ -43,13 +44,17 @@ while _points > 0:
         if  _inputChar in _randomWord and _inputChar not in _dashWord:
            _dashWord = replaceDash(_inputChar,_randomWord,_dashWord)
     
-        if _inputChar not in _randomWord:
+        if _inputChar not in _randomWord and _inputChar not in _inputChars:
             _points = _points - 1
+
+        if _inputChar in _inputChars and _inputChar not in _randomWord:
+            print("You've already guessed this letter.")
 
         if _inputChar in _dashWord:
             print("No improvements")
         else:
             print("That letter doesn't appear in the word")
+        _inputChars = _inputChars + _inputChar
 
     print(" ")
     print(_dashWord)
