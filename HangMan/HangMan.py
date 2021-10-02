@@ -25,53 +25,55 @@ You survived!""")
         return False
 
 
-_menu = input("Type 'play' to play the game, 'exit' to quit:")
 
-if _menu == "play":
-    _words = ["javascript", "java","python", "ruby"]
-    _randomWord = _words[random.randrange(len(_words))]
-    _dashWord = ""
-    _points = 8
-    _inputChars = ""
+while True:
+    print("")
+    _menu = input("Type 'play' to play the game, 'exit' to quit:")
+
+    if _menu == "play":
+        _words = ["javascript", "java","python", "ruby"]
+        _randomWord = _words[random.randrange(len(_words))]
+        _dashWord = ""
+        _points = 8
+        _inputChars = ""
 
 
-    for i in range(len(_randomWord)):
-        _dashWord = _dashWord + "-"
-    print(_dashWord)  
+        for i in range(len(_randomWord)):
+            _dashWord = _dashWord + "-"
+        print(_dashWord)  
 
-    while _points > 0:
-        _inputChar = input("Input a letter:")
+        while _points > 0:
+            _inputChar = input("Input a letter:")
 
-        if isNormalInput(_inputChar):
+            if isNormalInput(_inputChar):
 
-            if _inputChar in _dashWord:
-                print("No improvements")
+                if _inputChar in _dashWord:
+                    print("No improvements")
 
-            if _inputChar not in _randomWord:
-                print("That letter doesn't appear in the word")
+                if _inputChar not in _randomWord:
+                    print("That letter doesn't appear in the word")
+                
+
+                if  _inputChar in _randomWord and _inputChar not in _dashWord:
+                    _dashWord = replaceDash(_inputChar,_randomWord,_dashWord)
             
+                if _inputChar not in _randomWord and _inputChar not in _inputChars:
+                    _points = _points - 1
 
-            if  _inputChar in _randomWord and _inputChar not in _dashWord:
-                _dashWord = replaceDash(_inputChar,_randomWord,_dashWord)
-        
-            if _inputChar not in _randomWord and _inputChar not in _inputChars:
-                _points = _points - 1
+                if _inputChar in _inputChars and _inputChar not in _randomWord:
+                    print("You've already guessed this letter.")
+                _inputChars = _inputChars + _inputChar
 
-            if _inputChar in _inputChars and _inputChar not in _randomWord:
-                print("You've already guessed this letter.")
-            _inputChars = _inputChars + _inputChar
-
+            print(" ")
+            print(_dashWord)
             
-            
+            if isWin(_dashWord):
+                break
 
         print(" ")
-        print(_dashWord)
-        
-        if isWin(_dashWord):
-            break
-
-    print(" ")
-    print("""Thanks for playing!
-    We'll see how well you did in the next stage""")
-elif _menu == exit:
-    "Ok("
+        print("""Thanks for playing!
+We'll see how well you did in the next stage""")
+    elif _menu == "exit":
+        print("Ok(")
+        break
+    
