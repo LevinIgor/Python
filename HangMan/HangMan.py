@@ -34,7 +34,8 @@ while True:
         _words = ["javascript", "java","python", "ruby"]
         _randomWord = _words[random.randrange(len(_words))]
         _dashWord = ""
-        _points = 8
+        _maxWord = max(_words,key=len)
+        _points =round( len(_maxWord)*1.5)
         _inputChars = ""
 
 
@@ -43,6 +44,7 @@ while True:
         print(_dashWord)  
 
         while _points > 0:
+            print(_points)
             _inputChar = input("Input a letter:")
 
             if isNormalInput(_inputChar):
