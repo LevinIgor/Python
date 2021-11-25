@@ -3,23 +3,24 @@ import copy
 def InputMatrix(titleSize,titleInput):
 
     print()
-    size = input(titleSize).split(' ')
-    size[0] = int(size[0])
-    size[1] = int(size[1])
-  
     matrix= []
-    print()
-    print(titleInput)
     try:
-       for i in range(size[0]):
+        size = input(titleSize).split(' ')
+        size[0] = int(size[0])
+        size[1] = int(size[1])
+        print()
+        print(titleInput)
+    
+        for i in range(size[0]):
             a = []
             line = input().split(" ")
             for j in range(size[1]):
                 a.append(int(line[j]))
             matrix.append(a)
-    except ValueError:
-        matrix.append([0,0,0],[0,0,0][0,0,0])
+    except:
         print("Ошибочные данные")
+        raise SystemExit
+       
     
 
     return matrix
@@ -42,7 +43,7 @@ def AddMatrices(m1,m2):
     PrintMatrix(matrix,"The result add matrix")
     return matrix
 def MultiplyMatricesByConst(m):
-    constant = int(input("Enter constant: "))
+    constant = float(input("Enter constant: "))
     matrix = copy.copy(m)
 
     for i in range(len(m)):
@@ -53,7 +54,6 @@ def MultiplyMatricesByConst(m):
 def MultiplyMatrices(a,b):
      zip_b = zip(*b)
      zip_b = list(zip_b)
-     
      PrintMatrix( [[sum(ele_a*ele_b for ele_a, ele_b in zip(row_a, col_b))for col_b in zip_b] for row_a in a], "Multiply matrix:")
 def Transpose(m,_type):
     if _type == "main":
@@ -81,29 +81,34 @@ def Determinant(matrix):
     size = len(matrix)
     if size == 2:
         return det2(matrix)
-    print("determinant: " + str(sum((-1) ** j * matrix[0][j] * determinant(minor(matrix, 0, j)) for j in range(size)))) 
+    print("determinant: " + str(sum((-1) ** j * matrix[0][j] * Determinant(minor(matrix, 0, j)) for j in range(size)))) 
 
 def eliminate(r1, r2, col, target=0):
     fac = (r2[col]-target) / r1[col]
     for i in range(len(r2)):
         r2[i] -= fac * r1[i]
 def gauss(a):
-    for i in range(len(a)):
-        if a[i][i] == 0:
-            for j in range(i+1, len(a)):
-                if a[i][j] != 0:
-                    a[i], a[j] = a[j], a[i]
-                    break
-            else:
-                print("-")
-        for j in range(i+1, len(a)):
-            eliminate(a[i], a[j], i)
-    for i in range(len(a)-1, -1, -1):
-        for j in range(i-1, -1, -1):
-            eliminate(a[i], a[j], i)
-    for i in range(len(a)):
-        eliminate(a[i], a[i], i, target=1)
-    return a
+    try:
+        for i in range(len(a)):
+            if a[i][i] == 0:
+                for j in range(i+1, len(a)):
+                    if a[i][j] != 0:
+                            a[i], a[j] = a[j], a[i]
+                            break
+                    else:
+                        print("-")
+                for j in range(i+1, len(a)):
+                    eliminate(a[i], a[j], i)
+            for i in range(len(a)-1, -1, -1):
+                for j in range(i-1, -1, -1):
+                    eliminate(a[i], a[j], i)
+            for i in range(len(a)):
+                eliminate(a[i], a[i], i, target=1)
+            return a
+    except:
+        print("Неверные данные деление на ноль")
+        raise SystemExit
+   
 def Inverse(a):
     tmp = [[] for _ in a]
     for i,row in enumerate(a):
@@ -143,7 +148,7 @@ while(work):
         else:
             print("Размер матриц должен быть одинаковый")
     if CHOICE == '2':
-        matrix = InputMatrix("Enter size of matrix:", "Enter matrix ")
+        matrix = InputMatrix("Enter size of matrix: ", "Enter matrix ")
         MultiplyMatricesByConst(matrix)
     if CHOICE == '3':
         matrixFirst = InputMatrix("Enter size of first matrix: ", "Enter first matrix")
@@ -160,7 +165,7 @@ while(work):
         4. Horizontal line
         """)
 
-        matrix = InputMatrix("Enter size of matrix: ", "Enter matrix")
+        matrix = InputMatrix("Enter size of matrix: ", "Enter matrix ")
 
         if tranType == '1':
             Transpose(matrix,"main")
@@ -171,7 +176,7 @@ while(work):
         if tranType == '4':
             print("4")   
     if CHOICE == '5':
-        matrix = InputMatrix("Enter size of matrix", "Enter matrix")
+        matrix = InputMatrix("Enter size of matrix: ", "Enter matrix")
         Determinant(matrix)
     if CHOICE == '6':
         matrix = InputMatrix("Enter size of matrix: ", "Enter matrix")
