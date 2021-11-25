@@ -13,9 +13,9 @@ def isWin():
     
     if (field[0] == oList or field[0] == xList)or(field[1] == oList or field[1] == xList)or(field[2] == oList or field[2] == xList):
         return True
-    if (field[0][0]==field[1][0]==field[2][0] == "X" or field[0][0]==field[1][0]==field[2][0] == "O") or (field[0][1]==field[1][1]==field[2][1] == "X" or field[0][1]==field[1][1]==field[2][1] == "O") or (field[0][2]==field[1][2]==field[2][2] == "X" or field[0][2]==field[1][2]==field[2][2] == "Y"):
+    if ((field[0][0] == field[1][0] == field[2][0] == "X") or (field[0][0] == field[1][0] == field[2][0] == "O")) or ((field[0][1] == field[1][1] == field[2][1] == "X") or (field[0][1] == field[1][1] == field[2][1] == "O")) or ((field[0][2] == field[1][2] == field[2][2] == "X") or (field[0][2] == field[1][2] == field[2][2] == "O")):
         return True
-    if (field[0][0] and field[1][1] and field[2][2] == "X" or field[0][0] and field[1][1] and field[2][2] == "O") or (field[0][2] and field[1][1] and field[2][0] == "X" or field[0][2] and field[1][1] and field[2][0] == "O"):
+    if ((field[0][0] == field[1][1] == field[2][2] == "X") or (field[0][0] == field[1][1] == field[2][2] == "O")) or ((field[0][2] == field[1][1] == field[2][0] == "X") or (field[0][2] == field[1][1] == field[2][0] == "O")):
         return True
     
     return False
@@ -31,13 +31,13 @@ current = "X"
 while True:
     print("Enter the coordinates:")
     coord = input()
-    numbers = ["0","1","2","3","4","5","6","7","8","9"]
+    numbers = ["1","2","3"]
     if len(coord) == 3 and coord[1] ==" ":
         if coord[0] in numbers and coord[2] in numbers: 
             xCord = int(coord[0])-1
             yCord = int(coord[2])-1
         else:
-            print("You should enter numbers!")
+            print("You should enter numbers should be from 1 to 3!")
             continue
     else:
         print("Enter coordinate types (X Y)")

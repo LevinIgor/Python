@@ -8,9 +8,10 @@ class CoffeMashine(object):
         self.cup = 9
     
     def action(self, action):
-        if action == "b":
+        if action == "buy":
             print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back:")
             buy =input()
+
             if buy == "1":
                 if self.water - 250 > 0 and self.coffee - 16 > 0 and self.cup > 0:
                     self.water = self.water - 250
@@ -19,6 +20,7 @@ class CoffeMashine(object):
                     self.money = self.money + 4
                 else:
                     print("Недостаточно ингредиентов")
+
             if buy == "2":
                 if self.water -350 > 0 and self.milk - 75 > 0 and self.coffee - 20 > 0 and self.cup > 0:
                     self.water = self.water - 350
@@ -28,6 +30,7 @@ class CoffeMashine(object):
                     self.money = self.money + 7
                 else:
                     print("Недостаточно ингредиентов")
+
             if buy == "3":
                 if self.water - 200 > 0 and self.milk - 100 > 0 and self.coffee - 12 > 0 and self.cup > 0:
                     self.water = self.water - 200
@@ -37,12 +40,15 @@ class CoffeMashine(object):
                     self.money = self.money + 6
                 else:
                     print("Недостаточно ингредиентов")
-            if buy == "b":
+
+            if buy == "buy":
                 return self
-        if action == "t":
+
+        if action == "take":
             print("I gave you " + str(self.money))
             self.money = 0
-        if action == "f":
+
+        if action == "fill":
             print("Write how many ml of water you want to add:")
             self.water = self.water + int(input())
             print("Write how many ml of milk you want to add:")
@@ -51,9 +57,11 @@ class CoffeMashine(object):
             self.coffee = self.coffee + int(input())
             print("Write how many disposable coffee cups you want to add:")
             self.cup = self.cup + int(input())
-        if action == "r":
+
+        if action == "remaining":
             self.printIng()
-        if action == "e":
+            
+        if action == "exit":
             global isWork
             isWork = False
  
