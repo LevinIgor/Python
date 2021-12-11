@@ -12,6 +12,7 @@ if NUMBER == 0:
  
 for i in range(NUMBER):
     NAMES[input("Enter the name of every friend (including you), each on a new line: ")] = 0
+
 TOTAL = int(input("Enter the total amount: "))
 ANSWER = input("Do you want to use the 'Who is lucky?' feature? Write y/n: ")
 
