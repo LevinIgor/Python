@@ -1,11 +1,35 @@
-# Stage 3
+def diff_int():
+    arr = []
+    mp_cnt = PERIOD * 12
+    rest = PRINCIPAL
+    mp_real = PRINCIPAL / (PERIOD * 12.0)
+    while mp_cnt != 0:
+        mp = mp_real + (rest * PERCENT / 1200)
+        arr.append(round(mp, 2))
+        rest = rest - mp_real
+        mp_cnt = mp_cnt - 1
+    return arr, round(sum(arr), 2)
+
+
+def ann_int():
+    mp_cnt = PERIODS
+    r = INTEREST / 1200.0
+    ak = (r * (1 + r) ** mp_cnt) / (((1 + r) ** mp_cnt) - 1)
+    mp = ANNUITY * ak
+    total = mp * mp_cnt
+    return round(mp, 2), round(total, 2)
+
+
+# Stage 4
 import math
 
 TYPE = input("""
 What do you want to calculate?
 type "n" for number of monthly payments,
 type "a" for annuity monthly payment amount,
-type "p" for loan principal: """)
+type "p" for loan principal:
+type "d" for different
+ """)
 
 if TYPE == "n":
         PRINCIPAL = input("Enter the loan principal: ")
@@ -28,4 +52,18 @@ if TYPE == "a":
     print("Your monthly payment = " + str(A))
 
 if TYPE == "p":
-    print("")
+    ANNUITY = float(input("Enter the annuity payment: ")) 
+    PERIODS = int( input("Enter periods: "))
+    INTEREST =float( input("Enter interest: ")) 
+    month = ann_int()
+    print("Month: " + str(round(month[0])))
+   
+
+if TYPE == "d":
+    PRINCIPAL =int(input("Enter principal: "))
+    PERIOD =int(input("Enter period: ")) /12
+    PERCENT = int(input("Enter percent: "))
+    months,total = diff_int()
+    for i in range(len(months)):
+        print("Month"+" " + str(i) + " : "+ str(months[i]))
+    print("Overpayment = " + str(round(total-PRINCIPAL,2)))
