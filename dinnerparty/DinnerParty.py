@@ -25,6 +25,23 @@ if ANSWER == 'y':
 
 
 print("No one is going to be lucky")
+
+ANSWER = input("Cashback? y/n: ")
+if ANSWER == "y":
+    name = "..................."
+    while (name in NAMES) == False:
+        name = input("Sho?: ")
+    x = (TOTAL*5)/100
+    y = (TOTAL/NUMBER)-(x/(NUMBER-1))
+    n = TOTAL/NUMBER+x
+    for i in NAMES:
+        NAMES[i] = y if i != name else n
+    print(NAMES)
+    print(name + " will paying the end: " + str(n-(2*x)))
+    
+        
+    sys.exit()
+    
 for i in NAMES:
     NAMES[i] = round(TOTAL/NUMBER,2) 
 print(NAMES)
