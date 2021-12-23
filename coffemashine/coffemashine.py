@@ -112,7 +112,7 @@ class CoffeMashine(object):
 
 coffeeMashine = CoffeMashine()
 while isWork:
-    print("Write action (buy, fill, take, remaining, exit):")
+    print("Write action (buy, fill, take, remaining, exit, rep):")
     action = input()
     coffeeMashine.action(action)
    
